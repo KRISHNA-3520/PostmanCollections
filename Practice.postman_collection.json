@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "326092ca-8af8-438c-a3a7-4047b91a9cb5",
+		"name": "Practice",
+		"description": "Learning\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "1stAPI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org",
+							"host": [
+								"httpbin",
+								"org"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ParameterExample",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/get?myparameter=1&myparameter2=2&myparameter3=this is cool&myparameter4=",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"get"
+							],
+							"query": [
+								{
+									"key": "myparameter",
+									"value": "1"
+								},
+								{
+									"key": "myparameter2",
+									"value": "2"
+								},
+								{
+									"key": "myparameter3",
+									"value": "this is cool"
+								},
+								{
+									"key": "myparameter4",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UUID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4936bda6-6223-4517-af4b-7bc444d0aba9",
+								"exec": [
+									"let response = pm.response.json();",
+									"pm.globals.set(\"uuid\",response.uuid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/uuid",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32b441b7-d383-44f5-8f19-e8e4d7bf1b26",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://requestbin.fullcontact.com/1cy3j3k1",
+							"protocol": "http",
+							"host": [
+								"requestbin",
+								"fullcontact",
+								"com"
+							],
+							"path": [
+								"1cy3j3k1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b5969f64-e447-405d-98af-1d4b19b9f802",
+								"exec": [
+									"pm.test(\"Board should be createde\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"API_Board3\");",
+									"     pm.expect(jsonData.closed).to.eql(false);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.prefs.permissionLevel).to.eql(\"private\");",
+									"});",
+									"",
+									"",
+									"let response = pm.response.json();",
+									"pm.globals.set(\"id\",response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/5d41819243b4d36e3ddfd3ee?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"5d41819243b4d36e3ddfd3ee"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adding new list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef696f66-3a11-438e-9e73-814eb638c17f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test name of the list\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(\"TESTING\");",
+									"    pm.expect(jsonData.closed).to.eql(false);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/lists?name=TESTING&idBoard={{id}}&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "TESTING"
+								},
+								{
+									"key": "idBoard",
+									"value": "{{id}}"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Arrays",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "75ebbc56-ec63-4281-af61-50f323d90255",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"console.log(jsonData.filters[2].id)",
+									"",
+									"",
+									"let manufacturers;",
+									"for(let filter of jsonData.filters)",
+									"{",
+									"   ",
+									"   if(filter.name!== \"MANUFACTURER\")",
+									"   {",
+									"   console.log(filter);",
+									"   }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://www.mocky.io/v2/5ab350d62f00005a00ca3663",
+							"protocol": "http",
+							"host": [
+								"www",
+								"mocky",
+								"io"
+							],
+							"path": [
+								"v2",
+								"5ab350d62f00005a00ca3663"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nested properties",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d41b1a1-5011-4504-aa25-22c44854f465",
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"/*let comments = jsonData.prefs.comments.status;",
+									"",
+									"console.log(comments);",
+									"",
+									"pm.test(\"Comment should be disabled\", function(){",
+									"    pm.expect(comments).to.eql(\"disabled\");",
+									"});",
+									"",
+									"*/",
+									"let statuS;",
+									"console.log(statuS);",
+									"",
+									"for(let key in jsonData.limits)",
+									"{",
+									"    console.log(key,jsonData.limits[key]);",
+									"    if(jsonData.limits[key].hasOwnProperty(\"boards\"))",
+									"    statuS = jsonData.limits[key].boards.totalPerMember.status;",
+									"    pm.expect(statuS).to.eql(\"ok\")",
+									"    console.log(\"Status : -\"+statuS);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+							"protocol": "http",
+							"host": [
+								"www",
+								"mocky",
+								"io"
+							],
+							"path": [
+								"v2",
+								"5ab34d8c2f00006600ca3652"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "POST request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9565b2b-56c7-4d27-8b9f-cba66513dee1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"name\":\"Krishna\",\n\t\"email\":\"abc@zeb.com\",\n\t\"id\":\"{{uuid}}\"\n}"
+						},
+						"url": {
+							"raw": "https://httpbin.org/post",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
